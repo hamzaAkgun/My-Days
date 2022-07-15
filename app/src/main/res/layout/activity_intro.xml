@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".activities.IntroActivity"
+    android:background="@drawable/bg_gradient">
+
+    <TextView
+        android:id="@+id/tv_app_name_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/intro_screen_title_text_marginTop"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:text="My Days"
+        android:textColor="@color/limed_white"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="@dimen/intro_screen_image_marginTop"
+        android:src="@drawable/diary" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/lets_get_started_text_marginTop"
+        android:fontFamily="sans-serif-thin"
+        android:text="Let's Get Started!"
+        android:textColor="@color/limed_white"
+        android:textSize="@dimen/lets_get_started_text_size"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/intro_text_marginStartEnd"
+        android:layout_marginTop="@dimen/intro_text_marginTop"
+        android:layout_marginEnd="@dimen/intro_text_marginStartEnd"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/intro_text_line_spacing_extra"
+        android:text="Keep track of your days with My Days. \n Rate your mood for the day."
+        android:textColor="@color/limed_white"
+        android:textSize="@dimen/intro_text_size"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/btn_sign_in_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/btn_marginStartEnd"
+        android:layout_marginTop="@dimen/intro_screen_sign_in_btn_marginTop"
+        android:layout_marginEnd="@dimen/btn_marginStartEnd"
+        android:background="@drawable/shape_button_rounded"
+        android:foreground="?attr/selectableItemBackground"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:paddingTop="@dimen/btn_paddingTopBottom"
+        android:paddingBottom="@dimen/btn_paddingTopBottom"
+        android:text="SIGN IN"
+        android:textColor="@color/persian_plum"
+        android:textSize="@dimen/btn_text_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/btn_sign_up_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/btn_marginStartEnd"
+        android:layout_marginTop="@dimen/intro_screen_sign_up_btn_marginTop"
+        android:layout_marginEnd="@dimen/btn_marginStartEnd"
+        android:background="@drawable/border_shape_rounded_alt"
+        android:backgroundTintMode="multiply"
+        android:fontFamily="sans-serif-thin"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingTop="@dimen/btn_paddingTopBottom"
+        android:paddingBottom="@dimen/btn_paddingTopBottom"
+        android:text="SIGN UP"
+        android:textColor="@color/limed_white"
+        android:textSize="@dimen/btn_text_size"
+        android:textStyle="bold"
+        tools:ignore="UnusedAttribute" />
+</LinearLayout>

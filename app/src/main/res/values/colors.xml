@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="army_canvas">#4B594C</color>
+    <color name="capsella">#778C7C</color>
+    <color name="lucky_potato">#EFEAD8</color>
+    <color name="limed_white">#D0C9C0</color>
+
+    <color name="platinum">#DCE0D9</color>
+    <color name="dark_purple">#31081F</color>
+    <color name="persian_plum">#6B0F1A</color>
+    <color name="davys_grey">#595959</color>
+    <color name="xanadu">#808F85</color>
+
+
+    <color name="primary_text_color">#363A43</color>
+    <color name="secondary_text_color">#7A8089</color>
+
+    <color name="snack_bar_error_color">#F70000</color>
+
+</resources>

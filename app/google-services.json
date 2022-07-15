@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "354445152482",
+    "project_id": "diary-fc58f",
+    "storage_bucket": "diary-fc58f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354445152482:android:aaa5245003d0ffd235cebb",
+        "android_client_info": {
+          "package_name": "com.example.mydays"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354445152482-lpoq0ijtd7c0129jhi4c8p8o3195stms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdknvsKVUexapnrtIHu8RCa3-kDUhazMw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354445152482-lpoq0ijtd7c0129jhi4c8p8o3195stms.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

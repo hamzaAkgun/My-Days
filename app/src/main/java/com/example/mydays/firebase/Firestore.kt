@@ -28,7 +28,7 @@ class Firestore {
             }
     }
 
-    fun createEntry(activity: AddEntryActivity, entry: Entry){
+    fun createEntry(activity: AddEntryActivity, entry: Entry) {
         mFireStore.collection(Constants.ENTRIES)
             .document()
             .set(entry, SetOptions.merge())
@@ -37,29 +37,10 @@ class Firestore {
             }
             .addOnFailureListener {
                 activity.hideProgressDialog()
-                Log.e("Firestore", "createEntry: FAILED: $it" )
+                Log.e("Firestore", "createEntry: FAILED: $it")
             }
     }
-    fun getEntriesList(activity: MainActivity){
-        mFireStore.collection(Constants.ENTRIES)
-            .whereArrayContains(Constants.ASSIGNED_TO, getCurrentUserId())
-            .get()
-            .addOnSuccessListener { 
-                document ->
-                Log.i("Firestore", document.documents.toString())
-                val entriesList: ArrayList<Entry> = ArrayList()
-                for (i in document.documents){
-                    val entry = i.toObject(Entry::class.java)!!
-                    entry.documentId = i.id
-                    entriesList.add(entry)
-                }
 
-                activity.populateEntriesList(entriesList)
-            }.addOnFailureListener{
-                activity.hideProgressDialog()
-                Log.e("Firestore", "Error while creating an entry", it  )
-            }
-    }
 
 
 
@@ -111,22 +92,63 @@ class Firestore {
         }
         return currentUserID
     }
+
     fun getEntryDetails(activity: EditActivity, documentId: String) {
         mFireStore.collection(Constants.ENTRIES)
             .document(documentId)
             .get()
-            .addOnSuccessListener {
-                    document ->
+            .addOnSuccessListener { document ->
                 Log.i("Firestore", document.toString())
                 val entry = document.toObject(Entry::class.java)!!
                 entry.documentId = document.id
                 activity.entryDetails(entry)
-            }.addOnFailureListener{
+            }.addOnFailureListener {
                 activity.hideProgressDialog()
-                Log.e("Firestore", "Error while getting the entry", it  )
+                Log.e("Firestore", "Error while getting the entry", it)
 
             }
     }
+    fun getEntriesList(activity: MainActivity) {
+        mFireStore.collection(Constants.ENTRIES)
+            .whereArrayContains(Constants.ASSIGNED_TO, getCurrentUserId())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.i("Firestore", document.documents.toString())
+                val entriesList: ArrayList<Entry> = ArrayList()
+                for (i in document.documents) {
+                    val entry = i.toObject(Entry::class.java)!!
+                    entry.documentId = i.id
+                    entriesList.add(entry)
+                }
+
+                activity.populateEntriesList(entriesList)
+            }.addOnFailureListener {
+                activity.hideProgressDialog()
+                Log.e("Firestore", "Error while creating an entry", it)
+            }
+    }
+
+    fun getEntryListWithRating(activity: MainActivity, rating: String) {
+        mFireStore.collection(Constants.ENTRIES)
+            .whereArrayContains(Constants.ASSIGNED_TO, getCurrentUserId())
+            .whereEqualTo(Constants.RATING, rating)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.i("Firestore", document.toString())
+                val entriesList: ArrayList<Entry> = ArrayList()
+                for (i in document) {
+                    val entry = i.toObject(Entry::class.java)
+                    entry.documentId = i.id
+                    entriesList.add(entry)
+                }
+                activity.populateEntriesListWithRatings(entriesList, rating)
+            }.addOnFailureListener {
+                activity.hideProgressDialog()
+                Log.e("Firestore", "Error while getting the entry details with rating", it)
+
+            }
+    }
+
     fun updateUserProfileData(
         activity: MyProfileActivity,
         userHashMap: HashMap<String, Any>
@@ -138,14 +160,18 @@ class Firestore {
                 Log.i("TAG", "Profile Data Updated Successfully")
                 Toast.makeText(activity, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
                 activity.profileUpdateSuccess()
-            }.addOnFailureListener{
+            }.addOnFailureListener {
                 activity.hideProgressDialog()
                 Log.e("TAG", "updateUserProfileData Error: $it")
                 Toast.makeText(activity, "Update failed!", Toast.LENGTH_SHORT).show()
             }
     }
 
-    fun updateEntryData(activity: EditActivity, documentId: String, entryHashMap: HashMap<String, Any>){
+    fun updateEntryData(
+        activity: EditActivity,
+        documentId: String,
+        entryHashMap: HashMap<String, Any>
+    ) {
 
 
         mFireStore.collection(Constants.ENTRIES)
@@ -156,7 +182,7 @@ class Firestore {
                 activity.updateEntryListSuccess()
             }
             .addOnFailureListener {
-                Log.e("FireStore", "Unable to update, caused by: $it" )
+                Log.e("FireStore", "Unable to update, caused by: $it")
                 activity.hideProgressDialog()
             }
     }

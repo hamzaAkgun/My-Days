@@ -83,7 +83,7 @@ class AddEntryActivity : BaseActivity() {
         val entry = Entry(
             binding.etTitle.text.toString(),
             binding.etSubtitle.text.toString(),
-            getDate(), //Caution
+            getDate(),
             mEntryImageURL,
             binding.ratingBar.rating.toString(),
             assignedUsersArrayList

@@ -2,12 +2,8 @@ package com.example.mydays.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
-import android.view.WindowManager
 import com.bumptech.glide.Glide
 import com.example.mydays.R
 import com.example.mydays.databinding.ActivitySplashBinding
@@ -25,7 +21,7 @@ class SplashActivity : BaseActivity() {
         noStatusBar()
 
 
-        showGif(binding.ivWriting, R.drawable.writing)
+        showGif(R.drawable.writing)
 
         Handler().postDelayed({
             val currentUserID = Firestore().getCurrentUserId()
@@ -39,7 +35,7 @@ class SplashActivity : BaseActivity() {
 
     }
 
-    private fun showGif(view: View, gif: Int) {
+    private fun showGif(gif: Int) {
         Glide.with(this).load(gif).into(binding.ivWriting)
     }
 }

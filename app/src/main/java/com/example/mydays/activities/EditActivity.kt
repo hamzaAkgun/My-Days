@@ -83,6 +83,7 @@ class EditActivity : BaseActivity() {
 
     }
 
+
     private fun setUpActionBar(toolbar: androidx.appcompat.widget.Toolbar) {
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar

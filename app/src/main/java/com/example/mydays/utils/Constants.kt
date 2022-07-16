@@ -25,6 +25,7 @@ object Constants {
     const val NAME: String = "name"
     const val MOBILE: String = "mobile"
 
+
     const val TITLE: String = "title"
     const val ENTRY: String = "entry"
     const val RATING: String = "rating"

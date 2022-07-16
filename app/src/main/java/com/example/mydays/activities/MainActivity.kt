@@ -2,24 +2,18 @@ package com.example.mydays.activities
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.webkit.MimeTypeMap
-import android.widget.Filter
 import android.widget.Toast
 import androidx.core.view.GravityCompat
-import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.mydays.R
 import com.example.mydays.adapters.EntryItemsAdapter
 import com.example.mydays.databinding.ActivityMainBinding
-import com.example.mydays.databinding.NavHeaderMainBinding
 import com.example.mydays.firebase.Firestore
 import com.example.mydays.models.Entry
 import com.example.mydays.models.User
@@ -28,10 +22,12 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.main_content.*
 import kotlinx.android.synthetic.main.nav_header_main.*
+import java.io.IOException
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mUserName: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +49,85 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     }
 
+    fun populateEntriesListWithRatings(entriesList: ArrayList<Entry>, rating: String) {
+        hideProgressDialog()
+        if (entriesList.size > 0) {
+            rv_entries.visibility = View.VISIBLE
+            tv_no_entries.visibility = View.GONE
+            rv_entries.layoutManager = LinearLayoutManager(this)
+            rv_entries.setHasFixedSize(true)
+            val adapter = EntryItemsAdapter(this, entriesList)
+            rv_entries.adapter = adapter
+
+
+
+            adapter.setOnClickListener(object : EntryItemsAdapter.OnClickListener {
+                override fun onClick(position: Int, model: Entry) {
+                    val intent = Intent(this@MainActivity, EditActivity::class.java)
+                    intent.putExtra(Constants.DOCUMENT_ID, model.documentId)
+                    startActivity(intent)
+                }
+            })
+
+        } else {
+            rv_entries.visibility = View.GONE
+            tv_no_entries.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.ratings_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.five_stars -> {
+                try {
+                    Firestore().getEntryListWithRating(this, "5.0")
+                } catch (e: Exception) {
+                    Log.e("Main Act", "onOptionsItemSelected: Failed due to $e")
+                }
+            }
+            R.id.four_stars -> {
+                try {
+                    Firestore().getEntryListWithRating(this, "4.0")
+                } catch (e: Exception) {
+                    Log.e("Main Act", "onOptionsItemSelected: Failed due to $e")
+                }
+            }
+            R.id.three_stars -> {
+                try {
+                    Firestore().getEntryListWithRating(this, "3.0")
+                } catch (e: Exception) {
+                    Log.e("Main Act", "onOptionsItemSelected: Failed due to $e")
+                }
+            }
+            R.id.two_stars -> {
+                try {
+                    Firestore().getEntryListWithRating(this, "2.0")
+                } catch (e: Exception) {
+                    Log.e("Main Act", "onOptionsItemSelected: Failed due to $e")
+                }
+            }
+            R.id.one_star -> {
+                try {
+                    Firestore().getEntryListWithRating(this, "1.0")
+                } catch (e: Exception) {
+                    Log.e("Main Act", "onOptionsItemSelected: Failed due to $e")
+                }
+            }
+            R.id.all -> {
+                try {
+                    Firestore().getEntriesList(this)
+                } catch (e: Exception) {
+                    Log.e("Main Act", "onOptionsItemSelected: Failed due to $e")
+                }
+            }
+        }
+        return true
+    }
 
 
     fun populateEntriesList(entriesList: ArrayList<Entry>) {
@@ -66,7 +141,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             rv_entries.adapter = adapter
 
 
-            adapter.setOnClickListener(object : EntryItemsAdapter.OnClickListener{
+
+            adapter.setOnClickListener(object : EntryItemsAdapter.OnClickListener {
                 override fun onClick(position: Int, model: Entry) {
                     val intent = Intent(this@MainActivity, EditActivity::class.java)
                     intent.putExtra(Constants.DOCUMENT_ID, model.documentId)

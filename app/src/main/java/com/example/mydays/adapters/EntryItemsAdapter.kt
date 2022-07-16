@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mydays.R
@@ -27,6 +29,8 @@ open class EntryItemsAdapter(
                 )
         )
     }
+
+    private var filteredListResult: ArrayList<Entry> = list
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
@@ -67,6 +71,7 @@ open class EntryItemsAdapter(
 
     private class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
+
 
 
 }
